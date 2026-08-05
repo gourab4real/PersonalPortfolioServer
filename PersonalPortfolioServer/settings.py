@@ -1,7 +1,5 @@
 from pathlib import Path
 from decouple import config
-from botocore.config import Config
-import certifi
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -101,32 +99,22 @@ USE_I18N = True
 
 USE_TZ = True
 
-import certifi
-import os
-from decouple import config
-
-# PersonalPortfolioServer/settings.py
-from decouple import config
-
 STATIC_URL = 'static/'
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
+AWS_STORAGE_BUCKET_NAME = "personal-portfolio-bucket"
+AWS_S3_ENDPOINT_URL = "https://0a8dc0a29b178ded32c684d9670110c6.r2.cloudflarestorage.com"
+AWS_S3_REGION_NAME = "auto"
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_S3_ADDRESSING_STYLE = "path"
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CUSTOM_DOMAIN = "pub-7c385f9da69b4bad94f79d1d5bd475b2.r2.dev"
+
 STORAGES = {
     "default": {
         "BACKEND": "PhotoApp.storage_backends.CloudflareR2Storage",
-        "OPTIONS": {
-            "access_key": AWS_ACCESS_KEY_ID,
-            "secret_key": AWS_SECRET_ACCESS_KEY,
-            "bucket_name": "personal-portfolio-bucket",
-            "endpoint_url": "https://0a8dc0a79b178ded32c684d9670110c6.r2.cloudflarestorage.com",
-            "custom_domain": "pub-7c385f9da69b4bad94f79d1d5bd475b2.r2.dev",
-            "signature_version": "s3v4",
-            "querystring_auth": False,
-            "addressing_style": "path",
-            "verify": False,
-        },
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
