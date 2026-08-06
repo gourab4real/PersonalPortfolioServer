@@ -1,3 +1,4 @@
+from django.views.generic import detail
 from rest_framework import status
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
@@ -36,3 +37,40 @@ class PhotoViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_201_CREATED
             )
         return Response({'status': -1, 'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['post'])
+    def get_photo_by_id(self, request):
+        try:
+            photo = Photo.objects.get(id=request.data['id'])
+            photo_serialized = self.get_serializer(photo)
+            return Response({'status': 1, 'photo': photo_serialized.data}, status=status.HTTP_200_OK)
+        except Photo.DoesNotExist:
+            return Response({'status': -2, 'error': 'Photo not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'status': -1, 'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['post'])
+    def delete_photo_by_id(self, request):
+        try:
+            photo = Photo.objects.get(id=request.data['id'])
+            photo.delete()
+            return Response({'status': 1, 'message': 'Photo deleted successfully'}, status=status.HTTP_200_OK)
+        except Photo.DoesNotExist:
+            return Response({'status': -2, 'error': 'Photo not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'status': -1, 'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    @action(detail=False, methods=['post'])
+    def update_photo_by_id(self, request):
+        try:
+            photo = Photo.objects.get(id=request.data['id'])
+            if photo.title:
+                photo.title = request.data['title']
+            if photo.description:
+                photo.description = request.data['description']
+            photo.save()
+            return Response({'status': 1, 'message': 'Photo updated successfully', 'data': self.get_serializer(photo).data}, status=status.HTTP_200_OK)
+        except Photo.DoesNotExist:
+            return Response({'status': -2, 'error': 'Photo not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({'status': -1, 'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
