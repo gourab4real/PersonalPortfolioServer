@@ -1,0 +1,31 @@
+{
+  "name": "DeployedPersonalPortfolioServerEnv",
+  "variables": [
+    {
+      "name": "serverUrl",
+      "value": "https://gourab4real.pythonanywhere.com",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "access_token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzg2MTg3OTcwLCJpYXQiOjE3ODYxODQzNzAsImp0aSI6IjU5YmYzMDMzZDQ1YjRiMzNhODliNWQxZTc4MzYxMWFjIiwidXNlcl9pZCI6IjEifQ.U2a_YYgKe2vKfEEbu5Faoobdh7ZoAX-K0xPmaoAB3mA",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "refresh_token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4NjI3MDc3MCwiaWF0IjoxNzg2MTg0MzcwLCJqdGkiOiIyNTg2NGFhZTdhZWE0ZjlhYTdhYzIxYWM1ZjE2OTVlNSIsInVzZXJfaWQiOiIxIn0.GKUk5jMHHNrO7zfPy7_3kHeWJ72ydIiWIiZPwob3x-Y",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    }
+  ],
+  "info": {
+    "type": "bruno-environment",
+    "exportedAt": "2026-08-08T10:38:05.666Z",
+    "exportedUsing": "Bruno/v3.1.4"
+  }
+}
