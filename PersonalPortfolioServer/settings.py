@@ -48,7 +48,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     # Add your deployed production frontend URL here when ready:
-    "https://gourab4real.netlify.app/",
+    "https://gourab4real.netlify.app",
 ]
 
 # Or set CORS_ALLOW_ALL_ORIGINS = True during local testing if needed:
@@ -132,13 +132,13 @@ STATIC_URL = 'static/'
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = "personal-portfolio-bucket"
-AWS_S3_ENDPOINT_URL = "https://0a8dc0a29b178ded32c684d9670110c6.r2.cloudflarestorage.com"
-AWS_S3_REGION_NAME = "auto"
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_ADDRESSING_STYLE = "path"
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_CUSTOM_DOMAIN = "pub-7c385f9da69b4bad94f79d1d5bd475b2.r2.dev"
+AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN')
 
 STORAGES = {
     "default": {
