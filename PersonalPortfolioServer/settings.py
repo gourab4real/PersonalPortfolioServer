@@ -125,9 +125,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
 # FIle Storing
 # -------------------
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
