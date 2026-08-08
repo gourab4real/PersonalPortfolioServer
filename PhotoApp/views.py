@@ -7,6 +7,8 @@ from .models import Photo
 from .serializers import PhotoSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 import urllib3
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Suppress SSL insecure warnings in dev console
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -15,9 +17,15 @@ class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
     parser_classes = (MultiPartParser, FormParser)
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
-    # Custom action for GET http://127.0.0.1:8000/photoapp/api/photos/get_all_photos/
-    @action(detail=False, methods=['get'])
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve', 'get_all_photos']:
+            return [AllowAny()]
+        return [IsAuthenticated()]
+
+    @action(detail=False, methods=['get'], permission_classes=[AllowAny])
     def get_all_photos(self, request):
         try:
             photos = Photo.objects.all()
@@ -26,7 +34,6 @@ class PhotoViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'status': -1, 'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    # Custom action for POST http://127.0.0.1:8000/photoapp/api/photos/add_photo/
     @action(detail=False, methods=['post'])
     def add_photo(self, request):
         serializer = self.get_serializer(data=request.data)
