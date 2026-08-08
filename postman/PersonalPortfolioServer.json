@@ -1,0 +1,346 @@
+{
+  "info": {
+    "name": "PersonalPortfolioServer",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "PhotoApp",
+      "item": [
+        {
+          "name": "UploadImage",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/photoapp/api/photos/add_photo/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "photoapp",
+                "api",
+                "photos",
+                "add_photo",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": [
+                    "C:\\Users\\Gourab\\Downloads\\GMS00243.jpg.jpeg"
+                  ],
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "title",
+                  "value": "demo_title",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "description",
+                  "value": "This is a demo description",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetAllPhotos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/photoapp/api/photos/get_all_photos/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "photoapp",
+                "api",
+                "photos",
+                "get_all_photos",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "DeletePhotoById",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/photoapp/api/photos/delete_photo_by_id/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "photoapp",
+                "api",
+                "photos",
+                "delete_photo_by_id",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GetPhotoById",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/photoapp/api/photos/get_photo_by_id/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "photoapp",
+                "api",
+                "photos",
+                "get_photo_by_id",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "id",
+                  "value": "2",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "UserApp",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/userapp/login/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "userapp",
+                "login",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"gourab\",\n  \"password\": \"12345\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {},
+                "exec": [
+                  "// Ensure request returned 200/201 and has response data",
+                  "if (pm.response.code === 200 || pm.response.code === 201) {",
+                  "    const data = pm.response.body;",
+                  "",
+                  "    // Adjust paths if your API response nesting differs:",
+                  "    // If tokens are nested inside data.tokens (from your previous Signup endpoint):",
+                  "    const accessToken = data.access || (data.tokens && data.tokens.access);",
+                  "    const refreshToken = data.refresh || (data.tokens && data.tokens.refresh);",
+                  "",
+                  "    if (accessToken) {",
+                  "        pm.environment.set(\"access_token\", accessToken);",
+                  "    }",
+                  "    ",
+                  "    if (refreshToken) {",
+                  "        pm.environment.set(\"refresh_token\", refreshToken);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "RefreshToken",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/userapp/refresh/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "userapp",
+                "refresh",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "description": "",
+            "url": {
+              "raw": "{{serverUrl}}/userapp/logout/",
+              "protocol": "",
+              "host": [
+                "{{serverUrl}}"
+              ],
+              "path": [
+                "userapp",
+                "logout",
+                ""
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "serverUrl",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

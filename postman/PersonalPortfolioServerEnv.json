@@ -1,0 +1,31 @@
+{
+  "name": "PersonalPortfolioServerEnv",
+  "variables": [
+    {
+      "name": "serverUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "access_token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzg2MTc0ODYzLCJpYXQiOjE3ODYxNzEyNjMsImp0aSI6IjlkMDM4YTk2Nzk4MDQ5NGRiNTE2ZDBmY2U0ZmU4YTRkIiwidXNlcl9pZCI6IjEifQ.ahM4sI_VjtVfXP-ZspgXLbgXjkpCdPeOHG88II419-U",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    },
+    {
+      "name": "refresh_token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc4NjI1NzY2MywiaWF0IjoxNzg2MTcxMjYzLCJqdGkiOiIzN2QzNjJmNjc3ZDU0MWUyYjI3YzFiMzAzYTczN2JhZSIsInVzZXJfaWQiOiIxIn0.qlM_a6_3Kin0z757P-y_ooxQdOrYjDnUrMTCJVOHiaY",
+      "type": "text",
+      "enabled": true,
+      "secret": false
+    }
+  ],
+  "info": {
+    "type": "bruno-environment",
+    "exportedAt": "2026-08-08T07:12:22.182Z",
+    "exportedUsing": "Bruno/v3.1.4"
+  }
+}
