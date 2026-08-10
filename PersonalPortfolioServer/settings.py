@@ -49,6 +49,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     # Add your deployed production frontend URL here when ready:
     "https://gourab4real.netlify.app",
+    "https://personal-portfolio-admin-panel.netlify.app",
 ]
 
 # Or set CORS_ALLOW_ALL_ORIGINS = True during local testing if needed:
