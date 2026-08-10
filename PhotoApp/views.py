@@ -69,12 +69,13 @@ class PhotoViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['post'])
     def update_photo_by_id(self, request):
+        id = request.data.get('id')
         try:
-            photo = Photo.objects.get(id=request.data['id'])
-            if photo.title:
-                photo.title = request.data['title']
-            if photo.description:
-                photo.description = request.data['description']
+            photo = Photo.objects.get(id=id)
+            if request.data.get('title'):
+                photo.title = request.data.get('title')
+            if request.data.get('description'):
+                photo.description = request.data.get('description')
             photo.save()
             return Response({'status': 1, 'message': 'Photo updated successfully', 'data': self.get_serializer(photo).data}, status=status.HTTP_200_OK)
         except Photo.DoesNotExist:
